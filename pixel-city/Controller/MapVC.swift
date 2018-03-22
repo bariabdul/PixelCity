@@ -52,9 +52,13 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     func addDoubleTap() {
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(dropPin(sender:)))
-        doubleTap.numberOfTapsRequired = 2
+        doubleTap.numberOfTapsRequired = 1
         doubleTap.delegate = self
         mapView.addGestureRecognizer(doubleTap)
     }
@@ -133,8 +137,10 @@ extension MapVC: MKMapViewDelegate {
     
     func centerMapOnUserLocation() {
         guard let coordinate = locationManager.location?.coordinate else { return }
+        
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(coordinate, regionRadius * 2.0, regionRadius * 2.0)
         mapView.setRegion(coordinateRegion, animated: true)
+        mapView.isZoomEnabled = true
     }
     
     @objc func dropPin(sender: UITapGestureRecognizer) {

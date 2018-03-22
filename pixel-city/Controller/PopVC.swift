@@ -34,7 +34,7 @@ class PopVC: UIViewController, UIGestureRecognizerDelegate {
     func addDoubleTap() {
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(screenWasDoubleTapped))
         
-        doubleTap.numberOfTapsRequired = 2
+        doubleTap.numberOfTapsRequired = 1
         doubleTap.delegate = self
         
         view.addGestureRecognizer(doubleTap)
